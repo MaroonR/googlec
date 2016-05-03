@@ -1,7 +1,8 @@
 import random
 import string
 
-def gen_doc():
+# randomized test
+def gen_doc(): 
 	return (''.join(random.choice(string.ascii_lowercase)+' ' for _ in range(501)))
 
 def answer(document, searchTerms):
@@ -29,7 +30,7 @@ def answer(document, searchTerms):
 		if (i in buckets):
 			buckets[i].append(count)
 		count+=1
-	print(buckets)
+	#print(buckets)
     
     # Now we have bunch of buckets with all the terms' locations.
     # Let's find a set for a single bucket that represents the 
@@ -39,23 +40,23 @@ def answer(document, searchTerms):
 	distances = []
 	distance_records = []
 	curr_distances = {k: 501 for k in searchTerms}
-	print("************************************")
+	#print("************************************")
 	count = 0
 	for val in buckets[testkey]:  # for each value in the test bucket
 		curr_distances[testkey] = val
 		for key in buckets:       #we want to search the other buckets
-			print("Searching key %s" % key)
+			#print("Searching key %s" % key)
 			if(key == testkey):
-				print("skipping...")
+				#print("skipping...")
 				continue 				#except the test bucket
 			else:
 				# get closest value to val from the other buckets, find a candidate solution!!
 				curr_distances[key] = binsearch(val, buckets[key])
 				
-				print("CURRENT DISTANCE: %s" % curr_distances[key])
+				#print("CURRENT DISTANCE: %s" % curr_distances[key])
 		for (key, val) in curr_distances.items():
 			distances.append(val)
-		print("DISTANCE %s: "  % distances)
+		#print("DISTANCE %s: "  % distances)
 		distance_records.append(distances)
 		distances = []
 		curr_distances = {k: 501 for k in searchTerms}
@@ -73,11 +74,12 @@ def answer(document, searchTerms):
 		if( temp < smallest):
 			smallest = temp
 			smallest_tuple = i
-	print("**SMALLEST TUPLE: %s ***" % smallest_tuple)
+	#print("**SMALLEST TUPLE: %s ***" % smallest_tuple)
 	#we have the smallest distance, and its tuple, now we need to return the sub-list between the min and max
 	return tokens[smallest_tuple[0]: smallest_tuple[len(smallest_tuple)-1]+1] # done!
 
 
 print(answer("a b c d a", ['a','c','d']))
 print(answer("many google employees can program", ["google", "program"]))
-#print(answer(gen_doc(), ['a','c','d']))
+print(answer("world there hello hello where world", ["hello", "world"]))
+print(answer(gen_doc(), ['a','c','d']))
