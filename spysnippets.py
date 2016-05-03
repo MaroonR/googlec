@@ -1,10 +1,3 @@
-import random
-import string
-
-# randomized test
-def gen_doc(): 
-	return (''.join(random.choice(string.ascii_lowercase)+' ' for _ in range(501)))
-
 def answer(document, searchTerms):
 	#need to be able to quickly find a value from a list
 	def binsearch(x, lst):
@@ -88,14 +81,9 @@ def answer(document, searchTerms):
 			
 	#print("**SMALLEST TUPLE: %s ***" % smallest_tuple)
 	#we have the smallest distance, and its tuple, now we need to return the sub-list between the min and max
-	return tokens[smallest_tuple[0]: smallest_tuple[len(smallest_tuple)-1]+1] # done!
-
-
-print(answer("a b c d a", ['a','c','d']))
-print(answer("many google employees can program", ["google", "program"]))
-print(answer("world there hello hello where world", ["hello", "world"]))
-print(answer(gen_doc(), ['a','c','d']))
-print(answer("231 16 12 15 18 19 17 18 16 15 118", ["231", "15", "118"]))
-print("FAIL CASE ___________________________________________________________________________________")
-print(answer("d c g a s c", ["a", "c", "d"]))
-print("FAIL CASE ___________________________________________________________________________________")
+	new_arr = tokens[smallest_tuple[0]: smallest_tuple[len(smallest_tuple)-1]+1] # close!
+	newstring = ''
+	for i in new_arr:
+		newstring += i + " "
+	newstring = newstring[:-1]
+	return newstring # :D
