@@ -3,7 +3,7 @@ import string
 
 def gen_doc():
 	return (''.join(random.choice(string.ascii_lowercase)+' ' for _ in range(501)))
-#adding stuff!
+
 def answer(document, searchTerms):
 	#need to be able to quickly find a value from a list
 	def binsearch(x, lst):
@@ -69,7 +69,7 @@ def answer(document, searchTerms):
 	smallest = 501 #pls no
 	smallest_tuple = []
 	for i in distance_records:
-		temp = i[0] - i[len(i)-1]
+		temp = abs(i[0] - i[len(i)-1]) #needs absolute value!!
 		if( temp < smallest):
 			smallest = temp
 			smallest_tuple = i
